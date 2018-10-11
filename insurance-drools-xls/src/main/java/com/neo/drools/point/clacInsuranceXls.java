@@ -37,7 +37,7 @@ public class clacInsuranceXls {
         selfHealthInfo.setHealth(SelfHealthInfo.Health.NO);
         //工作信息
         SelfWorkInfo selfWorkInfo = new SelfWorkInfo();
-        selfWorkInfo.setIndustry(SelfWorkInfo.INDUSTRY.OUTDOOR);
+        selfWorkInfo.setIndustry(SelfWorkInfo.IndustryEnum.OUTDOOR);
 
 
         fullRequest.setFamilyIncomeExpenseInfo(familyIncomeExpenseInfo);

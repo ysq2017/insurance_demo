@@ -8,7 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>spring-boot-drools</name>
+	<name>spring-boot-drools-db</name>
 	<description>Demo project for Spring Boot and drools</description>
 
 	<properties>
