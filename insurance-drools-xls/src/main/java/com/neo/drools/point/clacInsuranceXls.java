@@ -28,9 +28,7 @@ public class clacInsuranceXls {
         FullRequest fullRequest = new FullRequest();
         //收入信息
         FamilyIncomeExpenseInfo familyIncomeExpenseInfo = new FamilyIncomeExpenseInfo();
-        familyIncomeExpenseInfo.setFamilyIncome(50);
-        familyIncomeExpenseInfo.setFamilyExpense(20);
-        familyIncomeExpenseInfo.setSelfIncome(20);
+        familyIncomeExpenseInfo.setFamilyIncome(60);
 
         FamilyMemberInfo familyMemberInfo;
         SelfBaseInfo selfBaseInfo;
@@ -41,11 +39,10 @@ public class clacInsuranceXls {
         SelfWorkInfo selfWorkInfo = new SelfWorkInfo();
         selfWorkInfo.setIndustry(SelfWorkInfo.INDUSTRY.OUTDOOR);
 
-        InsuranceResult insuranceResult = new InsuranceResult();
 
         fullRequest.setFamilyIncomeExpenseInfo(familyIncomeExpenseInfo);
         fullRequest.setSelfHealthInfo(selfHealthInfo);
-        fullRequest.setInsuranceResult(insuranceResult);
+        fullRequest.setSelfWorkInfo(selfWorkInfo);
         fullRequest.setResults(new ArrayList<InsuranceResult>());
 
         // 需要把规则所有参数统一传入（包括输入输出）
