@@ -13,3 +13,8 @@ about drools examples, spring boot drools examples
 
 
 > drools 在国内的资料偏少，而且有很多的坑，共享出来希望可以帮到和我一样的人，少走一些弯路。
+
+
+以上来自 https://github.com/ityouknow/drools-examples.git
+=====================================================
+- [spring-boot-drools-xls]：drools集成spring boot，使用决策表
