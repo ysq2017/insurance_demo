@@ -6,13 +6,13 @@ import java.util.List;
 
 public class Result {
 
-    private List<InsuranceResult> results;
+    private List<com.neo.drools.model.fact.InsuranceResult> results;
 
-    public List<InsuranceResult> getResults() {
+    public List<com.neo.drools.model.fact.InsuranceResult> getResults() {
         return results;
     }
 
-    public void setResults(List<InsuranceResult> results) {
+    public void setResults(List<com.neo.drools.model.fact.InsuranceResult> results) {
         this.results = results;
     }
 
