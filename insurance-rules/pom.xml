@@ -10,34 +10,17 @@
 	</parent>
 
 	<artifactId>insurance-rules</artifactId>
-
-	<packaging>kjar</packaging>
-
 	<name>insurance-rules</name>
 	<description>rules for insurance</description>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.7</java.version>
-		<spring.version>2.0.5.RELEASE</spring.version>
-		<drools.version>6.5.0.Final</drools.version>
-	</properties>
+	<packaging>kjar</packaging>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>kiebase-inclusion</artifactId>
-			<version>${drools.version}</version>
-		</dependency>
-
-
 		<dependency>
 			<groupId>com.secbro</groupId>
 			<artifactId>insurance-model</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-
 	</dependencies>
 
 	<build>
@@ -45,7 +28,7 @@
 			<plugin>
 				<groupId>org.kie</groupId>
 				<artifactId>kie-maven-plugin</artifactId>
-				<version>6.5.0.Final</version>
+				<version>7.6.0.Final</version>
 				<extensions>true</extensions>
 			</plugin>
 		</plugins>
@@ -68,7 +51,7 @@
 											kie-maven-plugin
 										</artifactId>
 										<versionRange>
-											[6.5.0.Final,)
+											[7.6.0.Final,)
 										</versionRange>
 										<goals>
 											<goal>generateModel</goal>

@@ -36,9 +36,21 @@
 
 	<modules>
 		<module>insurance-model</module>
-		<module>insurance-rules</module>
+		<!--<module>insurance-rules</module>-->
 		<module>insurance-drools-xls</module>
 	</modules>
+
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>myNexusRepo</id>
+			<name>Nexus Snapshot Repository</name>
+			<url>http://localhost:8081/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+
+
 
 
 </project>

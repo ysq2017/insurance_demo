@@ -1,6 +1,5 @@
 package com.neo.drools.config;
 
-import org.drools.decisiontable.DecisionTableProviderImpl;
 import org.kie.api.KieServices;
 import org.kie.api.builder.*;
 import org.kie.api.io.Resource;

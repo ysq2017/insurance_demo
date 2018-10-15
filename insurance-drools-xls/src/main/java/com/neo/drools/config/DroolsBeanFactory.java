@@ -1,6 +1,6 @@
 package com.neo.drools.config;
 
-import org.drools.decisiontable.DecisionTableProviderImpl;
+//import org.drools.decisiontable.DecisionTableProviderImpl;
 import org.kie.api.KieServices;
 import org.kie.api.builder.KieBuilder;
 import org.kie.api.builder.KieFileSystem;
@@ -41,17 +41,17 @@ public class DroolsBeanFactory {
      * Can be used for debugging
      * Input excelFile example: com/baeldung/drools/rules/Discount.xls
      */
-    public String getDrlFromExcel(String excelFile) {
-        DecisionTableConfiguration configuration = KnowledgeBuilderFactory.newDecisionTableConfiguration();
-        configuration.setInputType(DecisionTableInputType.XLS);
-
-        Resource dt = ResourceFactory.newClassPathResource(excelFile, getClass());
-
-        DecisionTableProviderImpl decisionTableProvider = new DecisionTableProviderImpl();
-
-        String drl = decisionTableProvider.loadFromResource(dt, null);
-
-        return drl;
-    }
+//    public String getDrlFromExcel(String excelFile) {
+//        DecisionTableConfiguration configuration = KnowledgeBuilderFactory.newDecisionTableConfiguration();
+//        configuration.setInputType(DecisionTableInputType.XLS);
+//
+//        Resource dt = ResourceFactory.newClassPathResource(excelFile, getClass());
+//
+//        DecisionTableProviderImpl decisionTableProvider = new DecisionTableProviderImpl();
+//
+//        String drl = decisionTableProvider.loadFromResource(dt, null);
+//
+//        return drl;
+//    }
 
 }

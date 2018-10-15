@@ -2,6 +2,7 @@ package com.neo.drools.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.neo.drools.config.DroolsBeanDynamicFactory;
+import com.neo.drools.config.DroolsBeanFactory;
 import com.neo.drools.model.*;
 import com.neo.drools.model.fact.InsuranceResult;
 import org.kie.api.KieServices;
@@ -11,7 +12,6 @@ import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.kie.internal.io.ResourceFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
@@ -23,34 +23,37 @@ import java.util.ArrayList;
 @Service
 public class RulesService {
 
-    private KieContainer kContainer;
+//    @PostConstruct
+//    public void setUp() {
+//        KieServices ks = KieServices.Factory.get();
+//
+//        ReleaseId releaseId = ks.newReleaseId("com.secbro", "insurance-rules", "0.0.1-SNAPSHOT");
+//
+//        kContainer = ks.newKieContainer(releaseId);
+//        KieScanner kScanner = ks.newKieScanner(kContainer);
+//
+//        // Start the KieScanner polling the Maven repository every 10 seconds
+//        kScanner.start(10000L);
+//    }
 
-    @PostConstruct
-    public void setUp() {
+    static KieSession getSession() {
         KieServices ks = KieServices.Factory.get();
-
-        ReleaseId releaseId = ks.newReleaseId("com.secbro", "insurance-rules", "0.0.1-SNAPSHOT");
-
-        kContainer = ks.newKieContainer(releaseId);
-        KieScanner kScanner = ks.newKieScanner(kContainer);
-
-        // Start the KieScanner polling the Maven repository every 10 seconds
-        kScanner.start(10000L);
+        KieContainer kc = ks.getKieClasspathContainer();
+        return kc.newKieSession("ks-insuranceXLS");
     }
-
 
     public String test(int income, int health, int industry){
 
-        KieSession kSession = kContainer.newKieSession("ksession1");
+        KieSession kSession = getSession();
 
-        String PATH = "insuranceRules/insuranceCalc.xlsx";
+//        String PATH = "insuranceRules/insuranceCalc.xlsx";
 //        String PATH = "D:\\tmp\\drools\\rules\\insuranceCalc.xlsx";
 
 
-        org.kie.api.io.Resource resource = ResourceFactory.newClassPathResource(PATH, getClass());
-//        kSession = new DroolsBeanFactory().getKieSession(resource);
+//        org.kie.api.io.Resource resource = ResourceFactory.newClassPathResource(PATH, getClass());
+//        KieSession kSession = new DroolsBeanFactory().getKieSession(resource);
 
-//        kieContainer = new DroolsBeanDynamicFactory().getKieSession();
+//        kContainer = new DroolsBeanFactory().getKieSession();
 //        kSession = kieContainer.newKieSession("ks");
 
 
