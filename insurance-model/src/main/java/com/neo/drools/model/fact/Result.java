@@ -1,7 +1,6 @@
 package com.neo.drools.model.fact;
 
 import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 
 import java.util.List;
 
