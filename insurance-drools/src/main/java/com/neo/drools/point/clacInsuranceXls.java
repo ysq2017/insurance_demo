@@ -28,7 +28,7 @@ public class clacInsuranceXls {
         FullRequest fullRequest = new FullRequest();
         //收入信息
         FamilyIncomeExpenseInfo familyIncomeExpenseInfo = new FamilyIncomeExpenseInfo();
-        familyIncomeExpenseInfo.setFamilyIncome(60);
+        familyIncomeExpenseInfo.setFamilyIncome(6);
 
         FamilyMemberInfo familyMemberInfo;
         SelfBaseInfo selfBaseInfo;
@@ -45,6 +45,12 @@ public class clacInsuranceXls {
         fullRequest.setSelfWorkInfo(selfWorkInfo);
         fullRequest.setResults(new ArrayList<InsuranceResult>());
 
+        InsuranceResult result = new InsuranceResult();
+        InsuranceResult result2 = new InsuranceResult();
+
+        // setGlobal 可以传输出参数进入ACTION
+        kSession.setGlobal("res", result);
+        kSession.setGlobal("res2", result2);
         // 需要把规则所有参数统一传入（包括输入输出）
         kSession.insert(fullRequest);
 

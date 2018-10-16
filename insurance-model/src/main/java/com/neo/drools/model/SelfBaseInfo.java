@@ -5,15 +5,15 @@ package com.neo.drools.model;
  */
 public class SelfBaseInfo {
 
-    Integer sex;
+    Byte sex;
 
     Integer age;
 
-    public Integer getSex() {
+    public Byte getSex() {
         return sex;
     }
 
-    public void setSex(Integer sex) {
+    public void setSex(Byte sex) {
         this.sex = sex;
     }
 
@@ -36,8 +36,32 @@ public class SelfBaseInfo {
         return sb.toString();
     }
 
-    public enum CustomerSex {
-        MALE,
-        FEMALE
+    public enum SexEnum {
+        WOMAN((byte)0, "女"),
+        MAN((byte)1, "男"),
+        UNKNOWN((byte)2, "未知");
+        byte value;
+        String desc;
+
+        SexEnum(byte value, String desc) {
+            this.value = value;
+            this.desc = desc;
+        }
+
+        public byte getValue() {
+            return value;
+        }
+
+        public void setValue(byte value) {
+            this.value = value;
+        }
+
+        public String getDesc() {
+            return desc;
+        }
+
+        public void setDesc(String desc) {
+            this.desc = desc;
+        }
     }
 }
