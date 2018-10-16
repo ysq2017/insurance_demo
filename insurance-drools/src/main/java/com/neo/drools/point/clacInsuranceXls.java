@@ -1,18 +1,13 @@
 package com.neo.drools.point;
 
-import com.google.common.collect.Lists;
+import com.neo.drools.constants.IndustryEnum;
 import com.neo.drools.model.*;
-import com.neo.drools.model.fact.InsuranceResult;
-import com.neo.drools.model.fact.Result;
-import jdk.nashorn.internal.objects.annotations.Function;
+import com.neo.drools.model.fact.InsuranceTypeResult;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
 
 public class clacInsuranceXls {
 
@@ -30,23 +25,22 @@ public class clacInsuranceXls {
         FamilyIncomeExpenseInfo familyIncomeExpenseInfo = new FamilyIncomeExpenseInfo();
         familyIncomeExpenseInfo.setFamilyIncome(6);
 
-        FamilyMemberInfo familyMemberInfo;
         SelfBaseInfo selfBaseInfo;
         // 健康信息
         SelfHealthInfo selfHealthInfo = new SelfHealthInfo();
         selfHealthInfo.setHealth(SelfHealthInfo.Health.NO);
         //工作信息
         SelfWorkInfo selfWorkInfo = new SelfWorkInfo();
-        selfWorkInfo.setIndustry(SelfWorkInfo.IndustryEnum.OUTDOOR);
+        selfWorkInfo.setIndustry(IndustryEnum.OUTDOOR);
 
 
         fullRequest.setFamilyIncomeExpenseInfo(familyIncomeExpenseInfo);
         fullRequest.setSelfHealthInfo(selfHealthInfo);
         fullRequest.setSelfWorkInfo(selfWorkInfo);
-        fullRequest.setResults(new ArrayList<InsuranceResult>());
+        fullRequest.setResults(new ArrayList<InsuranceTypeResult>());
 
-        InsuranceResult result = new InsuranceResult();
-        InsuranceResult result2 = new InsuranceResult();
+        InsuranceTypeResult result = new InsuranceTypeResult();
+        InsuranceTypeResult result2 = new InsuranceTypeResult();
 
         // setGlobal 可以传输出参数进入ACTION
         kSession.setGlobal("res", result);

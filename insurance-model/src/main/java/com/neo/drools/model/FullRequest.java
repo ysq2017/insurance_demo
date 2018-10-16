@@ -1,12 +1,12 @@
 package com.neo.drools.model;
 
-import com.neo.drools.model.fact.InsuranceResult;
+import com.neo.drools.model.fact.InsuranceTypeResult;
 
 import java.util.List;
 
 /**
- * @author: yangshaoqiang
- * @date: 2018/10/11 16:21
+ * @author yangshaoqiang
+ * @date 2018/10/11 16:21
  *
  * 综和所有问题
  */
@@ -14,7 +14,6 @@ public class FullRequest {
 
     private FamilyIncomeExpenseInfo familyIncomeExpenseInfo;
 
-    private FamilyMemberInfo familyMemberInfo;
 
     private SelfBaseInfo selfBaseInfo;
 
@@ -22,9 +21,9 @@ public class FullRequest {
 
     private SelfWorkInfo selfWorkInfo;
 
-    private List<InsuranceResult> results;
+    private List<InsuranceTypeResult> results;
 
-    private InsuranceResult insuranceResult;
+    private InsuranceTypeResult insuranceTypeResult;
 
     public FamilyIncomeExpenseInfo getFamilyIncomeExpenseInfo() {
         return familyIncomeExpenseInfo;
@@ -34,13 +33,6 @@ public class FullRequest {
         this.familyIncomeExpenseInfo = familyIncomeExpenseInfo;
     }
 
-    public FamilyMemberInfo getFamilyMemberInfo() {
-        return familyMemberInfo;
-    }
-
-    public void setFamilyMemberInfo(FamilyMemberInfo familyMemberInfo) {
-        this.familyMemberInfo = familyMemberInfo;
-    }
 
     public SelfBaseInfo getSelfBaseInfo() {
         return selfBaseInfo;
@@ -66,23 +58,23 @@ public class FullRequest {
         this.selfWorkInfo = selfWorkInfo;
     }
 
-    public List<InsuranceResult> getResults() {
+    public List<InsuranceTypeResult> getResults() {
         return results;
     }
 
-    public void setResults(List<InsuranceResult> results) {
+    public void setResults(List<InsuranceTypeResult> results) {
         this.results = results;
     }
 
-    public void addResults(List<InsuranceResult> results) {
+    public void addResults(List<InsuranceTypeResult> results) {
         this.results.addAll(results);
     }
 
-    public InsuranceResult getInsuranceResult() {
-        return insuranceResult;
+    public InsuranceTypeResult getInsuranceTypeResult() {
+        return insuranceTypeResult;
     }
 
-    public void setInsuranceResult(InsuranceResult insuranceResult) {
-        this.insuranceResult = insuranceResult;
+    public void setInsuranceTypeResult(InsuranceTypeResult insuranceTypeResult) {
+        this.insuranceTypeResult = insuranceTypeResult;
     }
 }

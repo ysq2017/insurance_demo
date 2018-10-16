@@ -1,18 +1,8 @@
 package com.neo.drools.point;
 
-import com.neo.drools.dao.Order;
-import com.neo.drools.dao.User;
-import com.neo.drools.model.FullRequest;
-import com.neo.drools.model.fact.InsuranceResult;
-import com.neo.drools.model.fact.Result;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
 
 public class clacPointXls {
 
@@ -58,12 +48,6 @@ public class clacPointXls {
 //
 //
 
-    }
-
-
-    static List<InsuranceResult> addResult(InsuranceResult.InsuranceEnum insuranceEnum, int score){
-        InsuranceResult result = new InsuranceResult(score, insuranceEnum);
-        return Arrays.asList(result);
     }
 
 

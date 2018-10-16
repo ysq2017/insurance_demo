@@ -2,13 +2,15 @@ package com.neo.drools.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.neo.drools.config.DroolsBeanFactory;
+import com.neo.drools.constants.IndustryEnum;
 import com.neo.drools.model.*;
-import com.neo.drools.model.fact.InsuranceResult;
+import com.neo.drools.model.fact.InsuranceTypeResult;
+import com.neo.drools.model.request.SelfInsuranceRequest;
+import com.neo.drools.model.response.InsuranceRecommendResponse;
 import com.neo.drools.service.RecommendInnerService;
 import org.kie.api.runtime.KieSession;
 import org.kie.internal.io.ResourceFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 
@@ -35,7 +37,6 @@ public class RecommendInnerServiceImpl implements RecommendInnerService {
         FamilyIncomeExpenseInfo familyIncomeExpenseInfo = new FamilyIncomeExpenseInfo();
         familyIncomeExpenseInfo.setFamilyIncome(income);
 
-        FamilyMemberInfo familyMemberInfo;
         SelfBaseInfo selfBaseInfo;
         // 健康信息
         SelfHealthInfo selfHealthInfo = new SelfHealthInfo();
@@ -43,14 +44,14 @@ public class RecommendInnerServiceImpl implements RecommendInnerService {
         selfHealthInfo.setHealth(healthInfo);
         //工作信息
         SelfWorkInfo selfWorkInfo = new SelfWorkInfo();
-        SelfWorkInfo.IndustryEnum industryEnum = SelfWorkInfo.IndustryEnum.getByValue(industry);
+        IndustryEnum industryEnum = IndustryEnum.getByValue(industry);
         selfWorkInfo.setIndustry(industryEnum);
 
 
         fullRequest.setFamilyIncomeExpenseInfo(familyIncomeExpenseInfo);
         fullRequest.setSelfHealthInfo(selfHealthInfo);
         fullRequest.setSelfWorkInfo(selfWorkInfo);
-        fullRequest.setResults(new ArrayList<InsuranceResult>());
+        fullRequest.setResults(new ArrayList<InsuranceTypeResult>());
 
         System.out.println(JSONObject.toJSONString(fullRequest));
 
@@ -62,5 +63,12 @@ public class RecommendInnerServiceImpl implements RecommendInnerService {
 
         System.out.println("触发了" + ruleFiredCount + "条规则");
         return JSONObject.toJSONString(fullRequest.getResults());
+    }
+
+
+    @Override
+    public InsuranceRecommendResponse selfRecommend(SelfInsuranceRequest selfInsuranceRequest) {
+
+        return null;
     }
 }

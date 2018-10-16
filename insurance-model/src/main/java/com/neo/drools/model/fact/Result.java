@@ -6,13 +6,13 @@ import java.util.List;
 
 public class Result {
 
-    private List<InsuranceResult> results;
+    private List<InsuranceTypeResult> results;
 
-    public List<InsuranceResult> getResults() {
+    public List<InsuranceTypeResult> getResults() {
         return results;
     }
 
-    public void setResults(List<InsuranceResult> results) {
+    public void setResults(List<InsuranceTypeResult> results) {
         this.results = results;
     }
 
