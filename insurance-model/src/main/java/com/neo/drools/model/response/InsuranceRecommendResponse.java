@@ -3,6 +3,7 @@ package com.neo.drools.model.response;
 import com.neo.drools.model.fact.InsuranceDetailResult;
 import com.neo.drools.model.fact.InsuranceTypeResult;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,6 +38,24 @@ public class InsuranceRecommendResponse {
 
     public void setInsuranceDetailResultList(List<InsuranceDetailResult> insuranceDetailResultList) {
         this.insuranceDetailResultList = insuranceDetailResultList;
+    }
+
+    public void addInsuranceTypeResultList(List<InsuranceTypeResult> insuranceTypeResultList) {
+        if(this.insuranceTypeResultList == null) {
+            this.insuranceTypeResultList = new ArrayList<>();
+            this.insuranceTypeResultList.addAll(insuranceTypeResultList);
+        } else {
+            this.insuranceTypeResultList.addAll(insuranceTypeResultList);
+        }
+    }
+
+    public void addInsuranceDetailResultList(List<InsuranceDetailResult> insuranceDetailResultList) {
+        if(this.insuranceDetailResultList == null) {
+            this.insuranceDetailResultList = new ArrayList<>();
+            this.insuranceDetailResultList.addAll(insuranceDetailResultList);
+        } else {
+            this.insuranceDetailResultList.addAll(insuranceDetailResultList);
+        }
     }
 
     @Override

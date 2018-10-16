@@ -18,6 +18,20 @@ public class InsuranceTypeResult {
      */
     private int amount;
 
+    public InsuranceTypeResult(int score, int amount, InsuranceTypeEnum insuranceTypeEnum) {
+        this.score = score;
+        this.amount = amount;
+        this.insuranceTypeEnum = insuranceTypeEnum;
+    }
+
+    public InsuranceTypeResult(int score, InsuranceTypeEnum insuranceTypeEnum) {
+        this.score = score;
+        this.insuranceTypeEnum = insuranceTypeEnum;
+    }
+
+    public InsuranceTypeResult() {
+    }
+
     private InsuranceTypeEnum insuranceTypeEnum;
 
     public int getScore() {

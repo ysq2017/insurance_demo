@@ -11,5 +11,13 @@
         <ksession name="ks-insuranceXLS"/>
     </kbase>
 
+    <kbase name="selfRecommend" packages="selfInsuranceRecommendRules">
+        <ksession name="ks-selfRecommend"/>
+    </kbase>
+
+    <kbase name="otherRecommend" packages="otherInsuranceRecommendRules">
+        <ksession name="ks-otherRecommend"/>
+    </kbase>
+
 
 </kmodule>
