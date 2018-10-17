@@ -37,6 +37,7 @@
 	<modules>
 		<module>insurance-model</module>
 		<module>insurance-drools</module>
+		<module>insurance-rules</module>
 	</modules>
 
 	<distributionManagement>

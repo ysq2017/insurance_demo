@@ -10,11 +10,14 @@ import com.neo.drools.model.request.SelfInsuranceRequest;
 import com.neo.drools.model.response.InsuranceRecommendResponse;
 import com.neo.drools.service.RecommendInnerService;
 import org.kie.api.KieServices;
+import org.kie.api.builder.KieScanner;
+import org.kie.api.builder.ReleaseId;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.kie.internal.io.ResourceFactory;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +27,7 @@ import java.util.List;
  */
 @Service
 public class RecommendInnerServiceImpl implements RecommendInnerService {
+    private KieContainer kContainer;
 
     @Override
     public String test(int income, int health, int industry){
@@ -72,18 +76,21 @@ public class RecommendInnerServiceImpl implements RecommendInnerService {
 
     @Override
     public InsuranceRecommendResponse selfRecommend(SelfInsuranceRequest selfInsuranceRequest) {
-
         KieSession kSession;
 
-        String PATH = "selfInsuranceRecommendRules/selfInsurance.xlsx";
-//        String PATH = "D:\\tmp\\drools\\rules\\insuranceCalc.xlsx";
+//        String PATH = "selfInsuranceRecommendRules/selfInsurance.xlsx";
+//        org.kie.api.io.Resource resource = ResourceFactory.newClassPathResource(PATH, getClass());
+//        kSession = new DroolsBeanFactory().getKieSession(resource);
 
-        org.kie.api.io.Resource resource = ResourceFactory.newClassPathResource(PATH, getClass());
-        kSession = new DroolsBeanFactory().getKieSession(resource);
+        kSession = kContainer.newKieSession("ks-selfRecommend");
+
 
         InsuranceRecommendResponse response = new InsuranceRecommendResponse();
-
         kSession.setGlobal("resp", response);
+
+        InsuranceTypeResult result2 = new InsuranceTypeResult();
+        kSession.setGlobal("res2", result2);
+
         kSession.insert(selfInsuranceRequest);
 
         int ruleFiredCount = kSession.fireAllRules();
@@ -96,6 +103,18 @@ public class RecommendInnerServiceImpl implements RecommendInnerService {
     }
 
 
+    @PostConstruct
+    public void setUp() {
+        KieServices ks = KieServices.Factory.get();
+
+        ReleaseId releaseId = ks.newReleaseId("com.dafy.insurance", "insurance-rules", "0.0.1-SNAPSHOT");
+
+        kContainer = ks.newKieContainer(releaseId);
+        KieScanner kScanner = ks.newKieScanner(kContainer);
+
+        // Start the KieScanner polling the Maven repository every 10 seconds
+        kScanner.start(10000L);
+    }
 
 
 
@@ -105,9 +124,11 @@ public class RecommendInnerServiceImpl implements RecommendInnerService {
         KieContainer kc = ks.getKieClasspathContainer();
         KieSession kSession = kc.newKieSession("ks-selfRecommend");
 
+//        KieSession kSession = kContainer.newKieSession("ksession1");
+
 //        String PATH = "selfInsuranceRecommendRules/selfInsurance.xlsx";
 //        org.kie.api.io.Resource resource = ResourceFactory.newClassPathResource(PATH, getClass());
-//        kSession = new DroolsBeanFactory().getKieSession(resource);
+//        KieSession kSession = new DroolsBeanFactory().getKieSession(resource);
 
         InsuranceRecommendResponse response = new InsuranceRecommendResponse();
         kSession.setGlobal("resp", response);
