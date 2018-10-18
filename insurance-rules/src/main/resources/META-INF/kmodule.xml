@@ -3,7 +3,11 @@
          xmlns="http://www.drools.org/xsd/kmodule">
 
     <kbase name="selfRecommend" packages="selfInsuranceRecommendRules">
-        <ksession name="ks-selfRecommend"/>
+        <ksession name="ksSelfRecommend"/>
+    </kbase>
+
+    <kbase name="kbReport" packages="reportRules">
+        <ksession name="ksReport"/>
     </kbase>
 
 

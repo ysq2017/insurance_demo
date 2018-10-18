@@ -2,6 +2,7 @@ package com.dafy.drools.model;
 
 import com.dafy.drools.constants.ExpenseTypeEnum;
 import com.dafy.drools.constants.IncomeTypeEnum;
+import com.google.common.collect.Lists;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class FamilyIncomeExpenseInfo {
     /**
      * 收入类型
      */
-    private List<IncomeTypeEnum> incomeTypeList;
+    private List<IncomeTypeEnum> incomeTypeList = Lists.newArrayList();
 
     /**
      * 家庭总支出
@@ -31,7 +32,7 @@ public class FamilyIncomeExpenseInfo {
     /**
      * 支出类型
      */
-    private List<ExpenseTypeEnum> expenseTypeList;
+    private List<ExpenseTypeEnum> expenseTypeList = Lists.newArrayList();
 
     /**
      * 家庭净收入:家庭总收入-家庭总支出

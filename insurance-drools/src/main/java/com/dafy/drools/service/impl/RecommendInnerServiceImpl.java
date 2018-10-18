@@ -1,14 +1,17 @@
 package com.dafy.drools.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.dafy.drools.constants.IncomeTypeEnum;
 import com.dafy.drools.model.*;
+import com.dafy.drools.model.request.ReportRequest;
+import com.dafy.drools.model.response.ReportResponse;
 import com.dafy.drools.service.RecommendInnerService;
 import com.dafy.drools.config.DroolsBeanFactory;
 import com.dafy.drools.constants.IndustryEnum;
-import com.dafy.drools.model.fact.InsuranceDetailResult;
 import com.dafy.drools.model.fact.InsuranceTypeResult;
 import com.dafy.drools.model.request.SelfInsuranceRequest;
 import com.dafy.drools.model.response.InsuranceRecommendResponse;
+import com.google.common.collect.Lists;
 import org.kie.api.KieServices;
 import org.kie.api.builder.KieScanner;
 import org.kie.api.builder.ReleaseId;
@@ -91,16 +94,10 @@ public class RecommendInnerServiceImpl implements RecommendInnerService {
     public InsuranceRecommendResponse selfRecommend(SelfInsuranceRequest selfInsuranceRequest) {
         KieSession kSession;
 
-//        String PATH = "selfInsuranceRecommendRules/selfInsurance.xlsx";
-//        org.kie.api.io.Resource resource = ResourceFactory.newClassPathResource(PATH, getClass());
-//        kSession = new DroolsBeanFactory().getKieSession(resource);
-
-        kSession = kContainer.newKieSession("ks-selfRecommend");
-
+        kSession = kContainer.newKieSession("ksSelfRecommend");
 
         InsuranceRecommendResponse response = new InsuranceRecommendResponse();
         kSession.setGlobal("resp", response);
-
         InsuranceTypeResult result2 = new InsuranceTypeResult();
         kSession.setGlobal("res2", result2);
 
@@ -115,23 +112,45 @@ public class RecommendInnerServiceImpl implements RecommendInnerService {
         return response;
     }
 
+    @Override
+    public ReportResponse getReport(ReportRequest request) {
+
+        KieSession kSession = kContainer.newKieSession("ksReport");
+
+        ReportResponse response = new ReportResponse();
+        kSession.setGlobal("resp", response);
+        InsuranceTypeResult result2 = new InsuranceTypeResult();
+        kSession.setGlobal("res2", result2);
+
+        kSession.insert(request);
+
+        int ruleFiredCount = kSession.fireAllRules();
+        kSession.dispose();
+
+        System.out.println("触发了" + ruleFiredCount + "条规则");
+        System.out.println("resp: " + JSONObject.toJSONString(response));
+
+        return response;
+    }
 
 
-
-
-///////////////////////////////////////
+    ///////////////////////////////////////
 
     public static InsuranceRecommendResponse selfRecommendTest(SelfInsuranceRequest selfInsuranceRequest) {
 
-        KieServices ks = KieServices.Factory.get();
-        KieContainer kc = ks.getKieClasspathContainer();
-        KieSession kSession = kc.newKieSession("ks-selfRecommend");
+//        KieServices ks = KieServices.Factory.get();
+//        KieContainer kc = ks.getKieClasspathContainer();
+//        KieSession kSession = kc.newKieSession("ks-selfRecommend");
 
-//        KieSession kSession = kContainer.newKieSession("ksession1");
 
 //        String PATH = "selfInsuranceRecommendRules/selfInsurance.xlsx";
 //        org.kie.api.io.Resource resource = ResourceFactory.newClassPathResource(PATH, getClass());
 //        KieSession kSession = new DroolsBeanFactory().getKieSession(resource);
+
+        KieServices ks = KieServices.Factory.get();
+        ReleaseId releaseId = ks.newReleaseId("com.dafy.insurance", "insurance-rules", "0.0.1-SNAPSHOT");
+        KieContainer kContainer = ks.newKieContainer(releaseId);
+        KieSession kSession = kContainer.newKieSession("ksSelfRecommend");
 
         InsuranceRecommendResponse response = new InsuranceRecommendResponse();
         kSession.setGlobal("resp", response);
@@ -151,33 +170,25 @@ public class RecommendInnerServiceImpl implements RecommendInnerService {
     }
 
     public static void main(String[] args) {
+
+        String PATH = "insuranceRules/insuranceCalc.xlsx";
+
         SelfInsuranceRequest request = new SelfInsuranceRequest();
         FamilyIncomeExpenseInfo familyIncomeExpenseInfo = new FamilyIncomeExpenseInfo();
+        List<IncomeTypeEnum> incomeTypeList = Lists.newArrayList(IncomeTypeEnum.INVEST);
+        familyIncomeExpenseInfo.setIncomeTypeList(incomeTypeList);
+
+
         familyIncomeExpenseInfo.setFamilyIncome(5);
         request.setFamilyIncomeExpenseInfo(familyIncomeExpenseInfo);
 
+        if(incomeTypeList.contains(IncomeTypeEnum.INVEST)) {
+            System.out.println("contains incomeType");
+        }
 
         InsuranceRecommendResponse resp = selfRecommendTest(request);
+        System.out.println("resp: " + JSONObject.toJSONString(resp));
 
-        test();
     }
-    static void test(){
-        SelfInsuranceRequest req = new SelfInsuranceRequest();
-        FamilyIncomeExpenseInfo fiei = req.getFamilyIncomeExpenseInfo();
-//        fiei.getFamilyIncome();
 
-        List<InsuranceTypeResult> insuranceTypeResultList = new ArrayList<>();
-        InsuranceTypeResult result = new InsuranceTypeResult();
-        result.setAmount(150);
-        insuranceTypeResultList.add(result);
-        List<InsuranceDetailResult> detailResults = new ArrayList<>();
-        InsuranceDetailResult detailResult = new InsuranceDetailResult();
-        detailResult.setAmount(150);
-        detailResults.add(detailResult);
-
-        InsuranceRecommendResponse resp = new InsuranceRecommendResponse();
-        resp.addInsuranceTypeResultList(insuranceTypeResultList);
-        resp.addInsuranceDetailResultList(detailResults);
-        System.out.println("resp:大类: " + JSONObject.toJSONString(resp.getInsuranceTypeResultList()));
-    }
 }

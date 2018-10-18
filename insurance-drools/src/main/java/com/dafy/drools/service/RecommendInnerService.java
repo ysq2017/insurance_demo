@@ -1,7 +1,9 @@
 package com.dafy.drools.service;
 
+import com.dafy.drools.model.request.ReportRequest;
 import com.dafy.drools.model.request.SelfInsuranceRequest;
 import com.dafy.drools.model.response.InsuranceRecommendResponse;
+import com.dafy.drools.model.response.ReportResponse;
 
 /**
  * 推荐Inner服务，决策表交互层
@@ -14,10 +16,10 @@ public interface RecommendInnerService {
 
     /**
      * 本人保险推荐
-     * @param selfInsuranceRequest
+     * @param request
      * @return
      */
-    InsuranceRecommendResponse selfRecommend(SelfInsuranceRequest selfInsuranceRequest);
+    InsuranceRecommendResponse selfRecommend(SelfInsuranceRequest request);
 
     /**
      * 其他家庭成员保险推荐
@@ -27,5 +29,6 @@ public interface RecommendInnerService {
     /**
      * 生成报告
      */
+    ReportResponse getReport(ReportRequest request);
 
 }
