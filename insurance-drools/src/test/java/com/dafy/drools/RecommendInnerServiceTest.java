@@ -1,9 +1,11 @@
 package com.dafy.drools;
 
+import com.alibaba.fastjson.JSONObject;
 import com.dafy.drools.config.DroolsBeanFactory;
 import com.dafy.drools.constants.ExpenseTypeEnum;
 import com.dafy.drools.constants.IncomeTypeEnum;
 import com.dafy.drools.model.FamilyIncomeExpenseInfo;
+import com.dafy.drools.model.SelfHealthInfo;
 import com.dafy.drools.model.request.ReportRequest;
 import com.dafy.drools.model.response.ReportResponse;
 import com.dafy.drools.service.RecommendInnerService;
@@ -33,9 +35,12 @@ public class RecommendInnerServiceTest {
         SelfInsuranceRequest request = new SelfInsuranceRequest();
         FamilyIncomeExpenseInfo familyIncomeExpenseInfo = new FamilyIncomeExpenseInfo();
         familyIncomeExpenseInfo.setFamilyIncome(5);
-        familyIncomeExpenseInfo.setIncomeTypeList(Lists.newArrayList());
         request.setFamilyIncomeExpenseInfo(familyIncomeExpenseInfo);
+        SelfHealthInfo selfHealthInfo = new SelfHealthInfo();
+        selfHealthInfo.setHealth(SelfHealthInfo.Health.NO);
+        request.setSelfHealthInfo(selfHealthInfo);
 
+        System.out.println("request: " + JSONObject.toJSONString(request));
         InsuranceRecommendResponse resp = recommendInnerService.selfRecommend(request);
         System.out.println("resp"+resp);
     }
